@@ -10,30 +10,37 @@ A web system for booking sports courts (pickleball, badminton, basketball, volle
 - Book a slot with your name and contact number/email
 - Look up your bookings by contact
 
+## Deployment (Railway)
+
+The repo ships a `railway.json` that builds both packages and starts the Express server, which serves the frontend and API on one port. Railway provides `PORT` automatically.
+
+1. Create a project at [railway.app](https://railway.app) → **Deploy from GitHub repo** → pick this repo
+2. Railway reads `railway.json` and builds/starts the app
+3. Generate a public domain: service → **Settings** → **Networking** → **Generate Domain**
+
+For local development with hot reload, run the API (`npm --prefix server run dev`) and the Vite client (`npm --prefix client run dev`) separately; the client proxies `/api` to port 4000.
+
 ## Tech Stack
 
 - **Client:** React 18 + Vite (`client/`)
-- **API:** Node.js + Express (`server/`)
-- **Storage:** JSON file store (`server/data/db.json`) — simple to run anywhere, easy to swap for a real database later
+- **API:** Node.js + Express (`server/`), serving the built frontend in production
+- **Storage:** JSON file store (`server/data/db.json`, auto-seeded) — simple to run anywhere, easy to swap for a real database later
 
 ## Getting Started
 
 Prerequisites: Node.js 18+
 
 ```bash
-# 1. Start the API (port 4000)
-cd server
-npm install
-npm run seed        # loads PH sample courts
-npm run dev
+# 1. Install and build
+npm --prefix server install
+npm --prefix client install
+npm --prefix client run build
 
-# 2. In a new terminal, start the client (port 5173)
-cd client
-npm install
-npm run dev
+# 2. Start the server (API + frontend on one port)
+PORT=4000 npm --prefix server start
 ```
 
-Open http://localhost:5173 to use the app. The Vite dev server proxies `/api` requests to the backend.
+Open http://localhost:4000 — the Express server serves both the API (`/api/*`) and the built React frontend. The database seeds itself with PH sample courts on first start.
 
 ## API Reference
 

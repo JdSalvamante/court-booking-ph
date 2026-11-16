@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   getCourts,
   getCourt,
@@ -7,6 +9,9 @@ import {
   getBookingsByContact,
   createBooking,
 } from "./db.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const clientDist = path.join(__dirname, "..", "..", "client", "dist");
 
 const app = express();
 app.use(cors());
@@ -98,6 +103,13 @@ app.get("/api/bookings", (req, res) => {
   res.json(getBookings());
 });
 
+app.use(express.static(clientDist));
+
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) return next();
+  res.sendFile(path.join(clientDist, "index.html"));
+});
+
 app.listen(PORT, () => {
-  console.log(`Court booking API listening on http://localhost:${PORT}`);
+  console.log(`Court booking app listening on http://localhost:${PORT}`);
 });

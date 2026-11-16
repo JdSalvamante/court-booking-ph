@@ -1,0 +1,16 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommands": [
+      "npm --prefix server install",
+      "npm --prefix client install",
+      "npm --prefix client run build"
+    ]
+  },
+  "deploy": {
+    "startCommand": "npm --prefix server start",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
