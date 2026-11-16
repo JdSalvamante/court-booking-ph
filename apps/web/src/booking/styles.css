@@ -1,0 +1,233 @@
+.booking-app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.booking-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.booking-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #115e59;
+}
+
+.booking-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.booking-nav a {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #0f172a;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.booking-nav a:hover,
+.booking-nav a[data-active="true"] {
+  border-color: #0f766e;
+  background: #0f766e;
+  color: #fff;
+}
+
+.court-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.court-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.15s ease;
+}
+
+.court-card:hover {
+  border-color: #0f766e;
+}
+
+.court-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.court-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.sport-badge {
+  background: #ccfbf1;
+  color: #115e59;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.muted {
+  color: #64748b;
+  margin: 0.25rem 0;
+}
+
+.price {
+  font-weight: 700;
+  color: #115e59;
+  margin: 0.25rem 0 0;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.slot {
+  text-align: center;
+  padding: 0.6rem 0;
+  font: inherit;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+}
+
+.slot:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.slot[data-selected="true"] {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #fff;
+}
+
+.booking-form {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.booking-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.booking-form input {
+  font: inherit;
+  padding: 0.5rem;
+  margin-top: 0.35rem;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.booking-form button,
+.primary-button {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0f766e;
+  border: 1px solid #0f766e;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.booking-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.confirm-box {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 420px;
+}
+
+.error-text {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: #0f766e;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.inline-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 480px;
+}
+
+.inline-form input {
+  flex: 1;
+  font: inherit;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.booking-row {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+
+.date-label {
+  display: block;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.date-label input {
+  font: inherit;
+  padding: 0.5rem;
+  margin-top: 0.35rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}

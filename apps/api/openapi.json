@@ -1,0 +1,635 @@
+{
+  "components": {
+    "schemas": {
+      "Booking": {
+        "properties": {
+          "contact": {
+            "title": "Contact",
+            "type": "string"
+          },
+          "courtId": {
+            "title": "Courtid",
+            "type": "string"
+          },
+          "createdAt": {
+            "title": "Createdat",
+            "type": "string"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "playerName": {
+            "title": "Playername",
+            "type": "string"
+          },
+          "time": {
+            "title": "Time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "courtId",
+          "date",
+          "time",
+          "playerName",
+          "contact",
+          "createdAt"
+        ],
+        "title": "Booking",
+        "type": "object"
+      },
+      "BookingRequest": {
+        "properties": {
+          "contact": {
+            "minLength": 3,
+            "title": "Contact",
+            "type": "string"
+          },
+          "courtId": {
+            "title": "Courtid",
+            "type": "string"
+          },
+          "date": {
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "title": "Date",
+            "type": "string"
+          },
+          "playerName": {
+            "minLength": 1,
+            "title": "Playername",
+            "type": "string"
+          },
+          "time": {
+            "pattern": "^([01]\\d|2[0-3]):00$",
+            "title": "Time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "courtId",
+          "date",
+          "time",
+          "playerName",
+          "contact"
+        ],
+        "title": "BookingRequest",
+        "type": "object"
+      },
+      "BookingWithCourt": {
+        "properties": {
+          "contact": {
+            "title": "Contact",
+            "type": "string"
+          },
+          "court": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Court"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "courtId": {
+            "title": "Courtid",
+            "type": "string"
+          },
+          "createdAt": {
+            "title": "Createdat",
+            "type": "string"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "playerName": {
+            "title": "Playername",
+            "type": "string"
+          },
+          "time": {
+            "title": "Time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "courtId",
+          "date",
+          "time",
+          "playerName",
+          "contact",
+          "createdAt"
+        ],
+        "title": "BookingWithCourt",
+        "type": "object"
+      },
+      "Court": {
+        "properties": {
+          "city": {
+            "title": "City",
+            "type": "string"
+          },
+          "closeHour": {
+            "title": "Closehour",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "openHour": {
+            "title": "Openhour",
+            "type": "integer"
+          },
+          "pricePerHour": {
+            "title": "Priceperhour",
+            "type": "integer"
+          },
+          "region": {
+            "title": "Region",
+            "type": "string"
+          },
+          "sport": {
+            "title": "Sport",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "sport",
+          "city",
+          "region",
+          "pricePerHour",
+          "openHour",
+          "closeHour"
+        ],
+        "title": "Court",
+        "type": "object"
+      },
+      "CreatedBooking": {
+        "properties": {
+          "booking": {
+            "$ref": "#/components/schemas/Booking"
+          },
+          "court": {
+            "$ref": "#/components/schemas/Court"
+          }
+        },
+        "required": [
+          "booking",
+          "court"
+        ],
+        "title": "CreatedBooking",
+        "type": "object"
+      },
+      "DependencyStatus": {
+        "properties": {
+          "configured": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Configured"
+          },
+          "reachable": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reachable"
+          }
+        },
+        "title": "DependencyStatus",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "properties": {
+          "deployment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deployment"
+          },
+          "deps": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DependencyStatus"
+            },
+            "title": "Deps",
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "ok",
+              "degraded"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "deps"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "Slot": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "time": {
+            "title": "Time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "time",
+          "available"
+        ],
+        "title": "Slot",
+        "type": "object"
+      },
+      "Slots": {
+        "properties": {
+          "courtId": {
+            "title": "Courtid",
+            "type": "string"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "slots": {
+            "items": {
+              "$ref": "#/components/schemas/Slot"
+            },
+            "title": "Slots",
+            "type": "array"
+          }
+        },
+        "required": [
+          "courtId",
+          "date",
+          "slots"
+        ],
+        "title": "Slots",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/bookings": {
+      "get": {
+        "operationId": "list_bookings",
+        "parameters": [
+          {
+            "description": "Filter by the contact used to book",
+            "in": "query",
+            "name": "contact",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by the contact used to book",
+              "title": "Contact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BookingWithCourt"
+                  },
+                  "title": "Response List Bookings",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Bookings, optionally by contact"
+      },
+      "post": {
+        "operationId": "create_booking",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedBooking"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Book a court slot"
+      }
+    },
+    "/api/courts": {
+      "get": {
+        "operationId": "list_courts",
+        "parameters": [
+          {
+            "description": "Filter by sport, e.g. Pickleball",
+            "in": "query",
+            "name": "sport",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by sport, e.g. Pickleball",
+              "title": "Sport"
+            }
+          },
+          {
+            "description": "Filter by region, e.g. Metro Manila",
+            "in": "query",
+            "name": "region",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by region, e.g. Metro Manila",
+              "title": "Region"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Court"
+                  },
+                  "title": "Response List Courts",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List courts, optionally filtered"
+      }
+    },
+    "/api/courts/{court_id}": {
+      "get": {
+        "operationId": "get_court",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "court_id",
+            "required": true,
+            "schema": {
+              "title": "Court Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Court"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One court by id"
+      }
+    },
+    "/api/courts/{court_id}/slots": {
+      "get": {
+        "operationId": "get_court_slots",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "court_id",
+            "required": true,
+            "schema": {
+              "title": "Court Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "date",
+            "required": true,
+            "schema": {
+              "title": "Date",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Slots"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Hourly slots for a date"
+      }
+    },
+    "/api/health": {
+      "get": {
+        "description": "The app's status and each dependency's: whether Mistral is configured, whether each checked\nservice answers. ``degraded`` when one does not; the response is 200 either way.",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Report dependency status; always answers 200"
+      }
+    }
+  }
+}
